@@ -29,6 +29,7 @@ export class Testings {
    */
   static async _jsonSchemaToEBNF(
     schema: string,
+    any_whitespace: boolean = true,
     indent = 2,
     separators?: [string, string],
     strictMode = true
@@ -46,7 +47,7 @@ export class Testings {
     // This is a workaround to Typescript not being able to express Optional value like Python; if
     // user specifies indent to be undefined, it still becomes 2.
     let optionalIndent: number | undefined = indent == -1 ? undefined : indent;
-    return binding._JSONSchemaToEBNF(schema, optionalIndent, separators, strictMode);
+    return binding._JSONSchemaToEBNF(schema, any_whitespace, optionalIndent, separators, strictMode);
   }
 
   /**
@@ -347,6 +348,7 @@ export class GrammarCompiler {
    */
   async compileJSONSchema(
     schema: string,
+    any_whitespace: boolean = true,
     indent = 2,
     separators?: [string, string],
     strictMode = true
@@ -365,7 +367,7 @@ export class GrammarCompiler {
     // user specifies indent to be undefined, it still becomes 2.
     let optionalIndent: number | undefined = indent == -1 ? undefined : indent;
     return new CompiledGrammar(
-      this.handle.CompileJSONSchema(schema, optionalIndent, separators, strictMode));
+      this.handle.CompileJSONSchema(schema, any_whitespace, optionalIndent, separators, strictMode));
   }
 
   /**
